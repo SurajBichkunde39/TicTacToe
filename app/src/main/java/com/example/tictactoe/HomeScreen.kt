@@ -11,17 +11,10 @@ import android.view.ViewGroup
  * Use the [HomeScreen.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeScreen : Fragment() {
+class HomeScreen : Fragment(R.layout.fragment_home_screen) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_screen, container, false)
     }
 
     companion object {
