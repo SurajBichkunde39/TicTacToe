@@ -23,7 +23,7 @@ class HomeScreen :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val spinner: Spinner = view.findViewById(R.id.number_of_sessions_spinner)
+        val spinner: Spinner = view.findViewById(R.id.number_of_matches_selector)
         setUpSpinner(spinner)
     }
 
