@@ -25,6 +25,7 @@ class HomeScreen :
     private lateinit var player1OButton: Button
     private lateinit var player2XButton: Button
     private lateinit var player2OButton: Button
+    private lateinit var startGameButton: Button
 
     // TODO(): Move this to viewModel later
     private val player1 = Player(PlaceholderMark.X)
@@ -44,6 +45,7 @@ class HomeScreen :
             player1OButton = findViewById(R.id.player_1_o_button)
             player2XButton = findViewById(R.id.player_2_x_button)
             player2OButton = findViewById(R.id.player_2_o_button)
+            startGameButton = findViewById(R.id.start_game_button)
             setUpButtonActions()
         }
     }
@@ -83,6 +85,14 @@ class HomeScreen :
                 playerNumber = 2,
                 selectedPlaceHolder = PlaceholderMark.O
             )
+        }
+        startGameButton.setOnClickListener {
+            requireActivity()
+                .supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.home_screen_container, GameFragment.newInstance())
+                .addToBackStack(null)
+                .commit()
         }
     }
 
