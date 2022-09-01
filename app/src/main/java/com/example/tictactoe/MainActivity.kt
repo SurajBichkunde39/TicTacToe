@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             supportFragmentManager
                 .beginTransaction()
                 .add(R.id.home_screen_container, HomeScreen.newInstance())
-                .commitNow()
+                .commit()
         }
     }
 }
