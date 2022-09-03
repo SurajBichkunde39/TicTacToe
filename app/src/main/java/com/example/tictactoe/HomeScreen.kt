@@ -155,6 +155,9 @@ class HomeScreen :
                     }
                 }
             }
+            else -> {
+                // can not choose empty
+            }
         }
     }
 
