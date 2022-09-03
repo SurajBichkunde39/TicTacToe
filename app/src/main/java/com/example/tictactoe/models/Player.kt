@@ -7,5 +7,6 @@ data class Player(
 
 enum class PlaceholderMark {
     X,
-    O
+    O,
+    EMPTY
 }
