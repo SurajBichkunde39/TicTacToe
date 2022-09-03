@@ -16,9 +16,9 @@ class GridAdapter(
 
     override fun getCount() = placeholderMarks.size
 
-    override fun getItem(p0: Int) = placeholderMarks[p0]
+    override fun getItem(position: Int) = placeholderMarks[position]
 
-    override fun getItemId(p0: Int) = p0.toLong()
+    override fun getItemId(position: Int) = position.toLong()
 
     override fun getView(position: Int, contentView: View?, p2: ViewGroup?): View {
         val view: View

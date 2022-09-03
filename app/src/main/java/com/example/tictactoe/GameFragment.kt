@@ -1,7 +1,6 @@
 package com.example.tictactoe
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.GridView
@@ -17,20 +16,16 @@ import com.example.tictactoe.models.PlaceholderMark
  */
 class GameFragment : Fragment(R.layout.fragment_game) {
 
-    private lateinit var gameGridView: GridView
-    private lateinit var gameGridAdapter: GridAdapter
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        gameGridView = view.findViewById(R.id.game_grid)
-        gameGridAdapter = GridAdapter(requireContext(), getInitialGameData())
-        gameGridView.adapter = gameGridAdapter
-        gameGridView.onItemClickListener =
-            AdapterView.OnItemClickListener { adapterView, view, position, id ->
-                // TODO(): Handle click listeners
-                val msg = "Position=$position, Id=$id"
-                Log.d("Game", msg)
-                Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
-            }
+        view.findViewById<GridView>(R.id.game_grid).apply {
+            adapter = GridAdapter(requireContext(), getInitialGameData())
+            onItemClickListener =
+                AdapterView.OnItemClickListener { adapterView, view, position, id ->
+                    // TODO(): Handle click listeners
+                    val msg = "Position=$position, Id=$id"
+                    Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                }
+        }
     }
 
     // TODO() : Move this to viewModel later
