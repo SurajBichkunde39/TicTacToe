@@ -6,7 +6,6 @@ import android.widget.AdapterView
 import android.widget.GridView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.tictactoe.models.GridAdapter
 import com.example.tictactoe.models.PlaceholderMark
 
 /**
