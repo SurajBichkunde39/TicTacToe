@@ -1,17 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical"
+    android:weightSum="1"
     tools:context=".GameFragment">
 
-    <GridView
-        android:id="@+id/game_grid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numColumns="3"
-        android:background="#14bdac"
-        >
-    </GridView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.3"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-</FrameLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:layout_weight="0.5"
+            android:background="@color/placeholder_other">
+
+            <Button
+                android:id="@+id/player_1_button"
+                android:layout_width="@dimen/placeholder_selector_button_size"
+                android:layout_height="@dimen/placeholder_selector_button_size"
+                android:layout_gravity="top|center_horizontal"
+                android:backgroundTint="@color/placeholder_selected"
+                android:clickable="false"
+                android:text="@string/player_placeholder_x"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/player1_text"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/score_player_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="30dp"
+                android:text="@string/score_sting"
+                android:textStyle="bold" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:layout_weight="0.5"
+            android:background="@color/placeholder_selected">
+
+            <Button
+                android:id="@+id/player_2_button"
+                android:layout_width="@dimen/placeholder_selector_button_size"
+                android:layout_height="@dimen/placeholder_selector_button_size"
+                android:layout_gravity="top|center_horizontal"
+                android:backgroundTint="@color/placeholder_selected"
+                android:clickable="false"
+                android:text="@string/player_placeholder_o"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/player2_text"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/score_player_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="30dp"
+                android:text="@string/score_sting"
+                android:textStyle="bold">
+
+            </TextView>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.5">
+
+        <GridView
+            android:id="@+id/game_grid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#14bdac"
+            android:numColumns="3" />
+
+    </LinearLayout>
+
+</LinearLayout>

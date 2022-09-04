@@ -13,4 +13,5 @@
         <item>5</item>
         <item>7</item>
     </string-array>
+    <string name="score_sting">Score = %1$d</string>
 </resources>
