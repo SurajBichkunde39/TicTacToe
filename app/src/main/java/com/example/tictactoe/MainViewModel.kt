@@ -8,6 +8,7 @@ import com.example.tictactoe.models.Player
 class MainViewModel : ViewModel() {
 
     private val _gameData: MutableList<PlaceholderMark> = getInitialGameData()
+
     /** Represent the current state of game board at any point. */
     val gameData: List<PlaceholderMark> = _gameData
 
@@ -17,7 +18,6 @@ class MainViewModel : ViewModel() {
         private set
 
     private var numberOfMatchesInCurrentSession = 0
-    private var currentMatchNumber =  0
 
     private lateinit var boardManager: BoardManager
 
@@ -46,7 +46,58 @@ class MainViewModel : ViewModel() {
         numberOfMatchesInCurrentSession = matches
     }
 
-    private fun isPositionValid(position: Int) = position < _gameData.size && _gameData[position] == PlaceholderMark.EMPTY
+    /**
+     * Find the correct action that should be performed on the selected position.
+     * Forwards the same to [BoardManager]
+     *
+     * @param position selected by current [Player] on board
+     */
+    fun onPositionSelected(position: Int) {
+        if (isPositionValid(position)) {
+            _gameData[position] = currentPlayer.placeHolderMark
+            boardManager.onPositionSelected(position, currentPlayer.placeHolderMark)
+            checkTermination()
+        } else {
+            boardManager.onInvalidPositionSelected(currentPlayer.placeHolderMark)
+        }
+    }
+
+    private fun checkTermination() {
+        if (isGameOver()) {
+            checkWinOrDraw()
+        } else {
+            switchCurrentPlayer()
+        }
+    }
+
+    private fun isGameOver(): Boolean {
+        val emptyPosition = _gameData.firstOrNull { it == PlaceholderMark.EMPTY }
+        return emptyPosition == null
+    }
+
+    private fun checkWinOrDraw() {
+        if(isWin()){
+            boardManager.onWin(currentPlayer)
+        } else {
+            boardManager.onDraw()
+        }
+    }
+
+    private fun isWin(): Boolean {
+        // TODO(): Add logic to check if last move won the game.
+        return false
+    }
+
+    private fun isPositionValid(position: Int) =
+        position < _gameData.size && _gameData[position] == PlaceholderMark.EMPTY
+
+    private fun switchCurrentPlayer() {
+        currentPlayer = if (currentPlayer == player1) {
+            player2
+        } else {
+            player1
+        }
+    }
 
     private fun getInitialGameData() = MutableList(9) { PlaceholderMark.EMPTY }
 }

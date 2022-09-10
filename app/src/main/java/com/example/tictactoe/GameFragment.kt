@@ -3,8 +3,10 @@ package com.example.tictactoe
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Button
 import android.widget.GridView
 import android.widget.Toast
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.tictactoe.models.BoardManager
@@ -19,15 +21,16 @@ import com.example.tictactoe.models.Player
 class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
 
     private val viewModel by activityViewModels<MainViewModel>()
+    private lateinit var gridAdapter: GridAdapter
+    private lateinit var gridView: GridView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        view.findViewById<GridView>(R.id.game_grid).apply {
-            adapter = GridAdapter(requireContext(), viewModel.gameData)
+        gridAdapter = GridAdapter(requireContext(), viewModel.gameData)
+        gridView = view.findViewById<GridView>(R.id.game_grid).apply {
+            adapter = gridAdapter
             onItemClickListener =
                 AdapterView.OnItemClickListener { adapterView, view, position, id ->
-                    // TODO(): Handle click listeners
-                    val msg = "Position=$position, Id=$id"
-                    Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                    viewModel.onPositionSelected(position)
                 }
         }
         viewModel.setBoardManager(this)
@@ -50,11 +53,22 @@ class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
     }
 
     override fun onPositionSelected(position: Int, placeholderMark: PlaceholderMark) {
-        TODO("Not yet implemented")
+        // TODO(): This is not the ideal way to update the view. Update.
+        gridView[position].findViewById<Button>(R.id.button).apply {
+            text = if (viewModel.currentPlayer.placeHolderMark == PlaceholderMark.X) {
+                context.getString(R.string.player_placeholder_x)
+            } else {
+                context.getString(R.string.player_placeholder_o)
+            }
+        }
     }
 
     override fun onInvalidPositionSelected(placeholderMark: PlaceholderMark) {
-        TODO("Not yet implemented")
+        Toast.makeText(
+            context,
+            "Invalid Move by ${placeholderMark.name}. Try Again.",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun onDraw() {
