@@ -7,14 +7,16 @@ import android.widget.GridView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.tictactoe.models.BoardManager
 import com.example.tictactoe.models.PlaceholderMark
+import com.example.tictactoe.models.Player
 
 /**
  * A [Fragment] subclass for game screen.
  * Use the [GameFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class GameFragment : Fragment(R.layout.fragment_game) {
+class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
 
     private val viewModel by activityViewModels<MainViewModel>()
 
@@ -28,6 +30,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
                     Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
                 }
         }
+        viewModel.setBoardManager(this)
     }
 
     companion object {
@@ -40,4 +43,26 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         @JvmStatic
         fun newInstance() = GameFragment()
     }
+
+    // start: BoardManager
+    override fun onCurrentPlayerUpdated(currentPlayer: Player) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPositionSelected(position: Int, placeholderMark: PlaceholderMark) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onInvalidPositionSelected(placeholderMark: PlaceholderMark) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDraw() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onWin(player: Player) {
+        TODO("Not yet implemented")
+    }
+    // end
 }
