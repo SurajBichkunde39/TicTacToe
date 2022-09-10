@@ -39,5 +39,4 @@ interface BoardManager {
      * @param player [Player] who won the match.
      */
     fun onWin(player: Player)
-
 }

@@ -36,17 +36,6 @@ class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
         viewModel.setBoardManager(this)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment GameFragment.
-         */
-        @JvmStatic
-        fun newInstance() = GameFragment()
-    }
-
     // start: BoardManager
     override fun onCurrentPlayerUpdated(currentPlayer: Player) {
         TODO("Not yet implemented")
@@ -79,4 +68,15 @@ class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
         TODO("Not yet implemented")
     }
     // end
+
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @return A new instance of fragment GameFragment.
+         */
+        @JvmStatic
+        fun newInstance() = GameFragment()
+    }
 }
