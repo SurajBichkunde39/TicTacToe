@@ -9,8 +9,8 @@ import android.widget.Spinner
 import androidx.annotation.ColorRes
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.example.tictactoe.models.PlaceholderMark
-import com.example.tictactoe.models.Player
 
 /**
  * A [Fragment] subclass for home screen.
@@ -21,36 +21,34 @@ class HomeScreen :
     Fragment(R.layout.fragment_home_screen),
     AdapterView.OnItemSelectedListener {
 
+    private val viewModel by activityViewModels<MainViewModel>()
+
     private lateinit var player1XButton: Button
     private lateinit var player1OButton: Button
     private lateinit var player2XButton: Button
     private lateinit var player2OButton: Button
     private lateinit var startGameButton: Button
-
-    // TODO(): Move this to viewModel later
-    private val player1 = Player(PlaceholderMark.X)
-    private val player2 = Player(PlaceholderMark.O)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var spinner: Spinner
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(view) {
-            val spinner: Spinner = findViewById(R.id.number_of_matches_selector)
-            setUpSpinner(spinner)
+        initializeViews(view)
+        setUpSpinner()
+        setUpButtonActions()
+    }
 
+    private fun initializeViews(view: View) {
+        with(view) {
             player1XButton = findViewById(R.id.player_1_x_button)
             player1OButton = findViewById(R.id.player_1_o_button)
             player2XButton = findViewById(R.id.player_2_x_button)
             player2OButton = findViewById(R.id.player_2_o_button)
             startGameButton = findViewById(R.id.start_game_button)
-            setUpButtonActions()
+            spinner = findViewById(R.id.number_of_matches_selector)
         }
     }
 
-    private fun setUpSpinner(spinner: Spinner) {
+    private fun setUpSpinner() {
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.number_of_matches_in_session,
@@ -87,6 +85,10 @@ class HomeScreen :
             )
         }
         startGameButton.setOnClickListener {
+            // like nth odd number
+            viewModel.setNumberOfMatchesInCurrentSession(
+                2 * spinner.selectedItemPosition - 1
+            )
             requireActivity()
                 .supportFragmentManager
                 .beginTransaction()
@@ -110,8 +112,7 @@ class HomeScreen :
                         updateBackgroundTint(player2XButton, R.color.placeholder_other)
                         updateBackgroundTint(player2OButton, R.color.placeholder_selected)
 
-                        player1.placeHolderMark = PlaceholderMark.X
-                        player2.placeHolderMark = PlaceholderMark.O
+                        viewModel.updatePlayers(PlaceholderMark.X, PlaceholderMark.O)
                     }
                     2 -> {
                         updateBackgroundTint(player1XButton, R.color.placeholder_other)
@@ -120,8 +121,7 @@ class HomeScreen :
                         updateBackgroundTint(player2XButton, R.color.placeholder_selected)
                         updateBackgroundTint(player2OButton, R.color.placeholder_other)
 
-                        player1.placeHolderMark = PlaceholderMark.O
-                        player2.placeHolderMark = PlaceholderMark.X
+                        viewModel.updatePlayers(PlaceholderMark.O, PlaceholderMark.X)
                     }
                     else -> {
                         // something went wrong
@@ -137,8 +137,7 @@ class HomeScreen :
                         updateBackgroundTint(player2XButton, R.color.placeholder_selected)
                         updateBackgroundTint(player2OButton, R.color.placeholder_other)
 
-                        player1.placeHolderMark = PlaceholderMark.O
-                        player2.placeHolderMark = PlaceholderMark.X
+                        viewModel.updatePlayers(PlaceholderMark.O, PlaceholderMark.X)
                     }
                     2 -> {
                         updateBackgroundTint(player1XButton, R.color.placeholder_selected)
@@ -147,8 +146,7 @@ class HomeScreen :
                         updateBackgroundTint(player2XButton, R.color.placeholder_other)
                         updateBackgroundTint(player2OButton, R.color.placeholder_selected)
 
-                        player1.placeHolderMark = PlaceholderMark.X
-                        player2.placeHolderMark = PlaceholderMark.O
+                        viewModel.updatePlayers(PlaceholderMark.X, PlaceholderMark.O)
                     }
                     else -> {
                         // something went wrong
@@ -173,18 +171,15 @@ class HomeScreen :
         playerNumber: Int,
         selectedPlaceHolder: PlaceholderMark
     ): Boolean {
-        return (playerNumber == 1 && selectedPlaceHolder == player1.placeHolderMark)
-                || (playerNumber == 2 && selectedPlaceHolder == player2.placeHolderMark)
+        return (playerNumber == 1 && selectedPlaceHolder == viewModel.player1.placeHolderMark)
+                || (playerNumber == 2 && selectedPlaceHolder == viewModel.player2.placeHolderMark)
     }
 
     // start: AdapterView.OnItemSelectedListener
-    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        TODO("Not yet implemented")
-    }
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) =
+        run { /* No- op */ }
 
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-        TODO("Not yet implemented")
-    }
+    override fun onNothingSelected(p0: AdapterView<*>?) = run { /* No- op */ }
     // end
 
     companion object {
