@@ -56,17 +56,17 @@ class MainViewModel : ViewModel() {
         if (isPositionValid(position)) {
             _gameData[position] = currentPlayer.placeHolderMark
             boardManager.onPositionSelected(position, currentPlayer.placeHolderMark)
-            checkTermination()
+            checkWinOrDraw()
         } else {
             boardManager.onInvalidPositionSelected(currentPlayer.placeHolderMark)
         }
     }
 
-    private fun checkTermination() {
-        if (isGameOver()) {
-            checkWinOrDraw()
-        } else {
-            switchCurrentPlayer()
+    private fun checkWinOrDraw() {
+        when {
+            isWin() -> boardManager.onWin(currentPlayer)
+            isGameOver() -> boardManager.onDraw()
+            else -> switchCurrentPlayer()
         }
     }
 
@@ -75,17 +75,61 @@ class MainViewModel : ViewModel() {
         return emptyPosition == null
     }
 
-    private fun checkWinOrDraw() {
-        if(isWin()){
-            boardManager.onWin(currentPlayer)
-        } else {
-            boardManager.onDraw()
-        }
+    private fun isWin(): Boolean {
+        return rowWiseWin() || columnWiseWin() || diagonalWin()
     }
 
-    private fun isWin(): Boolean {
-        // TODO(): Add logic to check if last move won the game.
+    private fun rowWiseWin(): Boolean {
+        for (i in 0..8 step 3) {
+            var isWin = true
+            for (j in i..(i + 2)) {
+                if (_gameData[j] != currentPlayer.placeHolderMark) {
+                    isWin = false
+                    break
+                }
+            }
+            if (isWin)
+                return true
+        }
         return false
+    }
+
+    private fun columnWiseWin(): Boolean {
+        for (i in 0..2) {
+            var ind = 0
+            var isWin = true
+            for (j in 0..2) {
+                if (_gameData[ind + i] != currentPlayer.placeHolderMark) {
+                    isWin = false
+                    break
+                }
+                ind += 3
+            }
+            if (isWin)
+                return true
+        }
+        return false
+    }
+
+    private fun diagonalWin(): Boolean {
+        var isWin = true
+        for (i in 0..2) {
+            if (_gameData[i * 4] != currentPlayer.placeHolderMark) {
+                isWin = false
+                break
+            }
+        }
+        if (isWin)
+            return true
+
+        isWin = true
+        for (i in 2..6 step 2) {
+            if (_gameData[i] != currentPlayer.placeHolderMark) {
+                isWin = false
+                break
+            }
+        }
+        return isWin
     }
 
     private fun isPositionValid(position: Int) =

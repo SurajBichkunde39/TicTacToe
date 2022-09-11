@@ -61,11 +61,19 @@ class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
     }
 
     override fun onDraw() {
-        TODO("Not yet implemented")
+        Toast.makeText(
+            context,
+            "Match draw. Nobody wins.",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun onWin(player: Player) {
-        TODO("Not yet implemented")
+        Toast.makeText(
+            context,
+            "Won the ${player.placeHolderMark.name}. wooo hooo.",
+            Toast.LENGTH_SHORT
+        ).show()
     }
     // end
 
