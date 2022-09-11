@@ -8,9 +8,9 @@ interface BoardManager {
      * Inform player the current player is changes, this can happen because of the valid move,
      * or at initial position.
      *
-     * @param currentPlayer updated current [Player]
+     * @param currentPlayerNumber updated current [Player] number.
      */
-    fun onCurrentPlayerUpdated(currentPlayer: Player)
+    fun onCurrentPlayerUpdated(currentPlayerNumber: Int)
 
     /**
      * Update the board as per new position selected.

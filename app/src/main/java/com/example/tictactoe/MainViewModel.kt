@@ -137,8 +137,10 @@ class MainViewModel : ViewModel() {
 
     private fun switchCurrentPlayer() {
         currentPlayer = if (currentPlayer == player1) {
+            boardManager.onCurrentPlayerUpdated(currentPlayerNumber = 2)
             player2
         } else {
+            boardManager.onCurrentPlayerUpdated(currentPlayerNumber = 1)
             player1
         }
     }

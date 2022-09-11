@@ -6,6 +6,7 @@ import android.widget.AdapterView
 import android.widget.Button
 import android.widget.GridView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -24,21 +25,49 @@ class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
     private lateinit var gridAdapter: GridAdapter
     private lateinit var gridView: GridView
 
+    private lateinit var player1Card: CardView
+    private lateinit var player2Card: CardView
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        gridAdapter = GridAdapter(requireContext(), viewModel.gameData)
-        gridView = view.findViewById<GridView>(R.id.game_grid).apply {
-            adapter = gridAdapter
-            onItemClickListener =
-                AdapterView.OnItemClickListener { adapterView, view, position, id ->
-                    viewModel.onPositionSelected(position)
-                }
-        }
+        initializeViews(view)
+        setUpGridView()
         viewModel.setBoardManager(this)
     }
 
+    private fun initializeViews(view: View) {
+        with(view) {
+            gridView = findViewById(R.id.game_grid)
+            player1Card = findViewById<CardView?>(R.id.player_1_card).apply {
+                findViewById<Button>(R.id.player_1_button).text =
+                    viewModel.player1.placeHolderMark.name
+            }
+            player2Card = findViewById<CardView?>(R.id.player_2_card).apply {
+                findViewById<Button>(R.id.player_2_button).text =
+                    viewModel.player2.placeHolderMark.name
+            }
+        }
+    }
+
+    private fun setUpGridView() {
+        gridAdapter = GridAdapter(requireContext(), viewModel.gameData)
+        gridView.apply {
+            adapter = gridAdapter
+            onItemClickListener =
+                AdapterView.OnItemClickListener { _, _, position, _ ->
+                    viewModel.onPositionSelected(position)
+                }
+        }
+    }
+
     // start: BoardManager
-    override fun onCurrentPlayerUpdated(currentPlayer: Player) {
-        TODO("Not yet implemented")
+    override fun onCurrentPlayerUpdated(currentPlayerNumber: Int) {
+        if (currentPlayerNumber == 1) {
+            player1Card.setCardBackgroundColor(resources.getColor(R.color.card_selected))
+            player2Card.setCardBackgroundColor(resources.getColor(R.color.card_default))
+        } else {
+            player2Card.setCardBackgroundColor(resources.getColor(R.color.card_selected))
+            player1Card.setCardBackgroundColor(resources.getColor(R.color.card_default))
+        }
     }
 
     override fun onPositionSelected(position: Int, placeholderMark: PlaceholderMark) {
