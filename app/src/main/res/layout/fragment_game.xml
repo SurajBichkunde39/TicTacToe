@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:layout_margin="20dp"
             android:layout_weight="0.5"
-            app:cardBackgroundColor="#BBF37F">
+            app:cardBackgroundColor="@color/card_selected">
 
             <Button
                 android:id="@+id/player_1_button"
