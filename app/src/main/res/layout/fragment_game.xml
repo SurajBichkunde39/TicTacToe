@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,11 +17,12 @@
         android:weightSum="1">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/player_1_card"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_margin="20dp"
             android:layout_weight="0.5"
-            android:background="@color/placeholder_other">
+            app:cardBackgroundColor="@color/card_selected">
 
             <Button
                 android:id="@+id/player_1_button"
@@ -53,11 +55,11 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/player_2_card"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_margin="20dp"
-            android:layout_weight="0.5"
-            android:background="@color/placeholder_selected">
+            android:layout_weight="0.5">
 
             <Button
                 android:id="@+id/player_2_button"

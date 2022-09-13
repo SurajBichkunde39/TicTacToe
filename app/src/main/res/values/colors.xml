@@ -10,4 +10,7 @@
 
     <color name="placeholder_selected">#534bae</color>
     <color name="placeholder_other">#d1d9ff</color>
+
+    <color name="card_selected">#BBF37F</color>
+    <color name="card_default">#FFFFFF</color>
 </resources>
