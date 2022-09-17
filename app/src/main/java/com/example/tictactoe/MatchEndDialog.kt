@@ -9,6 +9,7 @@ import android.widget.TextView
 import com.example.tictactoe.models.MatchEndDialogData
 
 class MatchEndDialog {
+    // TODO(): Make it better.
     companion object {
         fun showDialog(context: Context, matchEndDialog: MatchEndDialogData){
             val view = LayoutInflater.from(context).inflate(R.layout.match_end_dialog, null)

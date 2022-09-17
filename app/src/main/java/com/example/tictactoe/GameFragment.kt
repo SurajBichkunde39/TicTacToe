@@ -98,11 +98,10 @@ class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
     }
 
     override fun onDraw() {
-        val winString = resources.getString(R.string.match_draw_text)
         MatchEndDialog.showDialog(
             requireContext(), MatchEndDialogData(
                 isWin = false,
-                text = winString,
+                text = resources.getString(R.string.match_draw_text),
                 playerPlaceholderMark = PlaceholderMark.EMPTY
             )
         )
@@ -110,11 +109,10 @@ class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
     }
 
     override fun onWin(player: Player) {
-        val winString = resources.getString(R.string.match_won_text, player.placeHolderMark.name)
         MatchEndDialog.showDialog(
             requireContext(), MatchEndDialogData(
                 isWin = true,
-                text = winString,
+                text = resources.getString(R.string.match_won_text, player.placeHolderMark.name),
                 playerPlaceholderMark = player.placeHolderMark
             )
         )
