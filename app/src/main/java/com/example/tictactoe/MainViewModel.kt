@@ -62,6 +62,13 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    /** Rests the game board data.*/
+    fun resetGameData() {
+        for (i in 0..8){
+            _gameData[i] = PlaceholderMark.EMPTY
+        }
+    }
+
     private fun checkWinOrDraw() {
         when {
             isWin() -> boardManager.onWin(currentPlayer)
