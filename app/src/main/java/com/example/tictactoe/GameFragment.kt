@@ -11,6 +11,7 @@ import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.tictactoe.models.BoardManager
+import com.example.tictactoe.models.MatchEndDialogData
 import com.example.tictactoe.models.PlaceholderMark
 import com.example.tictactoe.models.Player
 
@@ -97,22 +98,26 @@ class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
     }
 
     override fun onDraw() {
-        // TODO(): Show proper dialog with draw information.
-        Toast.makeText(
-            context,
-            "Match draw. Nobody wins.",
-            Toast.LENGTH_SHORT
-        ).show()
+        val winString = resources.getString(R.string.match_draw_text)
+        MatchEndDialog.showDialog(
+            requireContext(), MatchEndDialogData(
+                isWin = false,
+                text = winString,
+                playerPlaceholderMark = PlaceholderMark.EMPTY
+            )
+        )
         setUpGridAdapter(invalidateData = true)
     }
 
     override fun onWin(player: Player) {
-        // TODO(): Show proper dialog with win information.
-        Toast.makeText(
-            context,
-            "Won the ${player.placeHolderMark.name}. wooo hooo.",
-            Toast.LENGTH_SHORT
-        ).show()
+        val winString = resources.getString(R.string.match_won_text, player.placeHolderMark.name)
+        MatchEndDialog.showDialog(
+            requireContext(), MatchEndDialogData(
+                isWin = true,
+                text = winString,
+                playerPlaceholderMark = player.placeHolderMark
+            )
+        )
         setUpGridAdapter(invalidateData = true)
     }
     // end

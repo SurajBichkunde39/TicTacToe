@@ -14,4 +14,6 @@
         <item>7</item>
     </string-array>
     <string name="score_sting">Score = %1$d</string>
+    <string name="match_draw_text">Nobody won the Game. Match Draw</string>
+    <string name="match_won_text">Player %1$s won the game. Yeee!!</string>
 </resources>
