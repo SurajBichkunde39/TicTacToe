@@ -49,15 +49,22 @@ class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
     }
 
     private fun setUpGridView() {
-        gridAdapter = GridAdapter(requireContext(), viewModel.gameData)
-        gridView.apply {
-            adapter = gridAdapter
-            onItemClickListener =
-                AdapterView.OnItemClickListener { _, _, position, _ ->
-                    viewModel.onPositionSelected(position)
-                }
-        }
+        setUpGridAdapter()
+        gridView.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, position, _ ->
+                viewModel.onPositionSelected(position)
+            }
     }
+
+    private fun setUpGridAdapter(invalidateData: Boolean = false) {
+        if (invalidateData) {
+            gridAdapter.notifyDataSetInvalidated()
+            viewModel.resetGameData()
+        }
+        gridAdapter = GridAdapter(requireContext(), viewModel.gameData)
+        gridView.adapter = gridAdapter
+    }
+
 
     // start: BoardManager
     override fun onCurrentPlayerUpdated(currentPlayerNumber: Int) {
@@ -90,19 +97,23 @@ class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
     }
 
     override fun onDraw() {
+        // TODO(): Show proper dialog with draw information.
         Toast.makeText(
             context,
             "Match draw. Nobody wins.",
             Toast.LENGTH_SHORT
         ).show()
+        setUpGridAdapter(invalidateData = true)
     }
 
     override fun onWin(player: Player) {
+        // TODO(): Show proper dialog with win information.
         Toast.makeText(
             context,
             "Won the ${player.placeHolderMark.name}. wooo hooo.",
             Toast.LENGTH_SHORT
         ).show()
+        setUpGridAdapter(invalidateData = true)
     }
     // end
 
