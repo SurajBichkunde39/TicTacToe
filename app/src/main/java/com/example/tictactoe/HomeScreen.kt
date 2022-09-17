@@ -87,7 +87,7 @@ class HomeScreen :
         startGameButton.setOnClickListener {
             // like nth odd number
             viewModel.setNumberOfMatchesInCurrentSession(
-                2 * spinner.selectedItemPosition - 1
+                (2 * spinner.selectedItemPosition) + 1
             )
             requireActivity()
                 .supportFragmentManager
