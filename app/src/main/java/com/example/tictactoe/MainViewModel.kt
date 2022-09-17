@@ -18,6 +18,7 @@ class MainViewModel : ViewModel() {
         private set
 
     private var numberOfMatchesInCurrentSession = 0
+    private var currentMatchSession = 1
 
     private lateinit var boardManager: BoardManager
 
@@ -64,14 +65,30 @@ class MainViewModel : ViewModel() {
 
     /** Rests the game board data.*/
     fun resetGameData() {
-        for (i in 0..8){
+        for (i in 0..8) {
             _gameData[i] = PlaceholderMark.EMPTY
         }
     }
 
+    /** If game is over, informs the board manager.*/
+    fun checkForGameOver() {
+        if (currentMatchSession >= numberOfMatchesInCurrentSession) {
+            val winner = if (player1.score > player2.score) {
+                player1
+            } else {
+                player2
+            }
+            boardManager.onGameOver(winner)
+        }
+        currentMatchSession += 1
+    }
+
     private fun checkWinOrDraw() {
         when {
-            isWin() -> boardManager.onWin(currentPlayer)
+            isWin() -> {
+                currentPlayer.score += 1
+                boardManager.onWin(currentPlayer)
+            }
             isGameOver() -> boardManager.onDraw()
             else -> switchCurrentPlayer()
         }

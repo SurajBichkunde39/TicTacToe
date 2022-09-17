@@ -104,6 +104,7 @@ class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
             Toast.LENGTH_SHORT
         ).show()
         setUpGridAdapter(invalidateData = true)
+        viewModel.checkForGameOver()
     }
 
     override fun onWin(player: Player) {
@@ -114,6 +115,15 @@ class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
             Toast.LENGTH_SHORT
         ).show()
         setUpGridAdapter(invalidateData = true)
+        viewModel.checkForGameOver()
+    }
+
+    override fun onGameOver(winner: Player) {
+        Toast.makeText(
+            context,
+            "Game over. ${winner.placeHolderMark} won the game.",
+            Toast.LENGTH_LONG
+        ).show()
     }
     // end
 

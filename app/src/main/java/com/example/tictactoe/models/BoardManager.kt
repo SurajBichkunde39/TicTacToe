@@ -39,4 +39,11 @@ interface BoardManager {
      * @param player [Player] who won the match.
      */
     fun onWin(player: Player)
+
+    /**
+     * Informs that game is over.
+     *
+     * @param winner [Player] who won the game.
+     */
+    fun onGameOver(winner: Player)
 }
