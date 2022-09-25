@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package com.example.tictactoe.fragments
 
 import android.os.Bundle
 import android.view.View
@@ -8,6 +8,8 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.tictactoe.MainViewModel
+import com.example.tictactoe.R
 import com.example.tictactoe.dialogs.ExitDialog
 import com.example.tictactoe.dialogs.ExitDialogData
 import com.example.tictactoe.dialogs.MatchEndDialog

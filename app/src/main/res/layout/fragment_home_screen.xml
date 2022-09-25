@@ -6,7 +6,7 @@
     android:background="#fedbe0"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".HomeScreen">
+    tools:context=".fragments.HomeScreen">
 
     <LinearLayout
         android:layout_width="match_parent"

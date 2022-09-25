@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package com.example.tictactoe.fragments
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Button
+import com.example.tictactoe.R
 import com.example.tictactoe.models.PlaceholderMark
 
 class GridAdapter(
-    private val context: Context,
+    context: Context,
     private val placeholderMarks: List<PlaceholderMark>,
 ) : BaseAdapter() {
     private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
