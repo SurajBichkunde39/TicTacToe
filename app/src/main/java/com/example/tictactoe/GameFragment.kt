@@ -44,6 +44,7 @@ class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
         initializeViews(view)
         setUpGridView()
         setUpBackPress()
+        updateScores()
         viewModel.setBoardManager(this)
     }
 
@@ -98,6 +99,13 @@ class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
         { dialogInterface, _ -> dialogInterface.dismiss() }
     )
 
+    private fun updateScores() {
+        player1Card.findViewById<TextView>(R.id.score_player_1).text =
+            resources.getString(R.string.score_sting, viewModel.player1.score)
+        player2Card.findViewById<TextView>(R.id.score_player_2).text =
+            resources.getString(R.string.score_sting, viewModel.player2.score)
+    }
+
     // start: BoardManager
     override fun onCurrentPlayerUpdated(currentPlayerNumber: Int) {
         if (currentPlayerNumber == 1) {
@@ -129,6 +137,7 @@ class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
     }
 
     override fun onDraw() {
+        updateScores()
         MatchEndDialog.showDialog(
             requireContext(), MatchEndDialogData(
                 isWin = false,
@@ -141,6 +150,7 @@ class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
     }
 
     override fun onWin(player: Player) {
+        updateScores()
         MatchEndDialog.showDialog(
             requireContext(), MatchEndDialogData(
                 isWin = true,
