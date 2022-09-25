@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package com.example.tictactoe.fragments
 
 import android.os.Bundle
 import android.view.View
@@ -10,6 +10,8 @@ import androidx.annotation.ColorRes
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.tictactoe.MainViewModel
+import com.example.tictactoe.R
 import com.example.tictactoe.models.PlaceholderMark
 
 /**
