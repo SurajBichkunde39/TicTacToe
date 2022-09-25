@@ -162,11 +162,11 @@ class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
     }
 
     override fun onGameOver(winner: Player) {
-        Toast.makeText(
-            context,
-            "Game over. ${winner.placeHolderMark} won the game.",
-            Toast.LENGTH_LONG
-        ).show()
+        backPressedCallback.isEnabled = false
+        parentFragmentManager
+            .beginTransaction()
+            .replace(R.id.home_screen_container, ResultFragment.newInstance())
+            .commit()
     }
     // end
 

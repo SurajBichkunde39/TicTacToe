@@ -17,7 +17,8 @@ class MainViewModel : ViewModel() {
     var currentPlayer = player1
         private set
 
-    private var numberOfMatchesInCurrentSession = 0
+    var numberOfMatchesInCurrentSession = 0
+    private set
     private var currentMatchSession = 1
 
     private lateinit var boardManager: BoardManager
@@ -65,6 +66,7 @@ class MainViewModel : ViewModel() {
 
     /** Resets the player scores and grid data.*/
     fun resetGameData() {
+        currentMatchSession = 1
         resetPlayerScores()
         resetGridData()
     }

@@ -18,4 +18,6 @@
     <string name="match_won_text">Player %1$s won the game. Yeee!!</string>
     <string name="exit_dialog_title">Are you sure you want to exit.</string>
     <string name="exit_dialog_message">It yes, this will reset all the current game data. You will be redirected by to home screen to start a new session.</string>
+    <string name="result_string_winner">Winner of this game is %1$s with score of %2$d / %3$d.</string>
+    <string name="result_string_draw">No body won the game. Match draw. Score equal for both players i.e %1$d / %2$d.</string>
 </resources>
