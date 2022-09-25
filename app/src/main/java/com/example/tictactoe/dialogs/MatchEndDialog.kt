@@ -1,4 +1,4 @@
-package com.example.tictactoe
+package com.example.tictactoe.dialogs
 
 import android.app.AlertDialog
 import android.content.Context
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import com.example.tictactoe.R
 import com.example.tictactoe.models.MatchEndDialogData
 
 class MatchEndDialog {

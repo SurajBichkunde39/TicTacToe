@@ -2,14 +2,15 @@ package com.example.tictactoe
 
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.Button
-import android.widget.GridView
-import android.widget.Toast
+import android.widget.*
+import androidx.activity.OnBackPressedCallback
 import androidx.cardview.widget.CardView
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.tictactoe.dialogs.ExitDialog
+import com.example.tictactoe.dialogs.ExitDialogData
+import com.example.tictactoe.dialogs.MatchEndDialog
 import com.example.tictactoe.models.BoardManager
 import com.example.tictactoe.models.MatchEndDialogData
 import com.example.tictactoe.models.PlaceholderMark
@@ -29,9 +30,17 @@ class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
     private lateinit var player1Card: CardView
     private lateinit var player2Card: CardView
 
+    private var backPressedCallback =
+        object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                ExitDialog.showDialog(getExitDialogData())
+            }
+        }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initializeViews(view)
         setUpGridView()
+        setUpBackPress()
         updateScores()
         viewModel.setBoardManager(this)
     }
@@ -61,11 +70,31 @@ class GameFragment : Fragment(R.layout.fragment_game), BoardManager {
     private fun setUpGridAdapter(invalidateData: Boolean = false) {
         if (invalidateData) {
             gridAdapter.notifyDataSetInvalidated()
-            viewModel.resetGameData()
+            viewModel.resetGridData()
         }
         gridAdapter = GridAdapter(requireContext(), viewModel.gameData)
         gridView.adapter = gridAdapter
     }
+
+    private fun setUpBackPress() {
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(backPressedCallback)
+    }
+
+    private fun handleBackPressed() {
+        viewModel.resetGameData()
+        backPressedCallback.isEnabled = false
+        requireActivity().onBackPressed()
+    }
+
+    private fun getExitDialogData() = ExitDialogData(
+        this.requireContext(),
+        R.string.exit_dialog_title,
+        R.string.exit_dialog_message,
+        { _, _ -> handleBackPressed() },
+        { dialogInterface, _ -> dialogInterface.dismiss() }
+    )
 
     private fun updateScores() {
         player1Card.findViewById<TextView>(R.id.score_player_1).text =

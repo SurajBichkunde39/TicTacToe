@@ -16,4 +16,6 @@
     <string name="score_sting">Score = %1$d</string>
     <string name="match_draw_text">Nobody won the Game. Match Draw</string>
     <string name="match_won_text">Player %1$s won the game. Yeee!!</string>
+    <string name="exit_dialog_title">Are you sure you want to exit.</string>
+    <string name="exit_dialog_message">It yes, this will reset all the current game data. You will be redirected by to home screen to start a new session.</string>
 </resources>

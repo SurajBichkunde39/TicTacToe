@@ -63,8 +63,14 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    /** Rests the game board data.*/
+    /** Resets the player scores and grid data.*/
     fun resetGameData() {
+        resetPlayerScores()
+        resetGridData()
+    }
+
+    /** Rests the game board data.*/
+    fun resetGridData() {
         for (i in 0..8) {
             _gameData[i] = PlaceholderMark.EMPTY
         }
@@ -167,6 +173,11 @@ class MainViewModel : ViewModel() {
             boardManager.onCurrentPlayerUpdated(currentPlayerNumber = 1)
             player1
         }
+    }
+
+    private fun resetPlayerScores() {
+        player1.score = 0
+        player2.score = 0
     }
 
     private fun getInitialGameData() = MutableList(9) { PlaceholderMark.EMPTY }
