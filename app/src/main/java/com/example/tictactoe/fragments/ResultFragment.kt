@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.tictactoe.MainViewModel
 import com.example.tictactoe.R
+import com.example.tictactoe.dialogs.ExitDialog
+import com.example.tictactoe.dialogs.ExitDialogData
 
 /**
  * A simple [Fragment] subclass for game result screen.
@@ -57,7 +59,7 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
     private fun setUpButtonActions(view: View) {
         with(view) {
             findViewById<Button>(R.id.exit).setOnClickListener {
-                requireActivity().finishAffinity()
+                ExitDialog.showDialog(getExitDialogData())
             }
             findViewById<Button>(R.id.rematch).setOnClickListener {
                 viewModel.resetGameData()
@@ -79,6 +81,13 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
     private fun setImage(imageView: ImageView, @DrawableRes imageResId: Int) =
         imageView.setImageDrawable(ContextCompat.getDrawable(requireActivity(), imageResId))
 
+    private fun getExitDialogData() = ExitDialogData(
+        this.requireContext(),
+        R.string.exit_dialog_title,
+        R.string.exit_application_message,
+        { _, _ -> requireActivity().finishAffinity() },
+        { dialogInterface, _ -> dialogInterface.dismiss() }
+    )
 
     companion object {
         /**
