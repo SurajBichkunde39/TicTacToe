@@ -1,9 +1,9 @@
-package com.example.tictactoe
+package com.twoplayerboard.tictactoe
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.tictactoe.fragments.HomeScreen
+import com.twoplayerboard.tictactoe.fragments.HomeScreen
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {

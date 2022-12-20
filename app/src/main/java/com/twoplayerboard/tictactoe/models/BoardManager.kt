@@ -1,4 +1,4 @@
-package com.example.tictactoe.models
+package com.twoplayerboard.tictactoe.models
 
 /**
  * Interface to manage the actions on the board.

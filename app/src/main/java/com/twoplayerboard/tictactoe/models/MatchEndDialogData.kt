@@ -1,4 +1,4 @@
-package com.example.tictactoe.models
+package com.twoplayerboard.tictactoe.models
 
 data class MatchEndDialogData(
     val isWin: Boolean,

@@ -1,4 +1,4 @@
-package com.example.tictactoe.dialogs
+package com.twoplayerboard.tictactoe.dialogs
 
 import android.app.AlertDialog
 import android.content.Context
@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import com.example.tictactoe.R
-import com.example.tictactoe.models.MatchEndDialogData
+import com.twoplayerboard.tictactoe.R
+import com.twoplayerboard.tictactoe.models.MatchEndDialogData
 
 class MatchEndDialog {
     // TODO(): Make it better.

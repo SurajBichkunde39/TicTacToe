@@ -1,9 +1,9 @@
-package com.example.tictactoe
+package com.twoplayerboard.tictactoe
 
 import androidx.lifecycle.ViewModel
-import com.example.tictactoe.models.BoardManager
-import com.example.tictactoe.models.PlaceholderMark
-import com.example.tictactoe.models.Player
+import com.twoplayerboard.tictactoe.models.BoardManager
+import com.twoplayerboard.tictactoe.models.PlaceholderMark
+import com.twoplayerboard.tictactoe.models.Player
 
 class MainViewModel : ViewModel() {
 
