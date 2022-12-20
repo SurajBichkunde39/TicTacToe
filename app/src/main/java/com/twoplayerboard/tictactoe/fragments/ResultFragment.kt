@@ -1,4 +1,4 @@
-package com.example.tictactoe.fragments
+package com.twoplayerboard.tictactoe.fragments
 
 import android.os.Bundle
 import android.view.View
@@ -9,8 +9,8 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.tictactoe.MainViewModel
-import com.example.tictactoe.R
+import com.twoplayerboard.tictactoe.R
+import com.twoplayerboard.tictactoe.MainViewModel
 
 /**
  * A simple [Fragment] subclass for game result screen.

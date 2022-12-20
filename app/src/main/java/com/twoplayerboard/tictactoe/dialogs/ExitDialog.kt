@@ -1,4 +1,4 @@
-package com.example.tictactoe.dialogs
+package com.twoplayerboard.tictactoe.dialogs
 
 import android.app.AlertDialog
 import android.content.Context

@@ -1,4 +1,4 @@
-package com.example.tictactoe.fragments
+package com.twoplayerboard.tictactoe.fragments
 
 import android.os.Bundle
 import android.view.View
@@ -8,15 +8,15 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.tictactoe.MainViewModel
-import com.example.tictactoe.R
-import com.example.tictactoe.dialogs.ExitDialog
-import com.example.tictactoe.dialogs.ExitDialogData
-import com.example.tictactoe.dialogs.MatchEndDialog
-import com.example.tictactoe.models.BoardManager
-import com.example.tictactoe.models.MatchEndDialogData
-import com.example.tictactoe.models.PlaceholderMark
-import com.example.tictactoe.models.Player
+import com.twoplayerboard.tictactoe.R
+import com.twoplayerboard.tictactoe.MainViewModel
+import com.twoplayerboard.tictactoe.dialogs.ExitDialog
+import com.twoplayerboard.tictactoe.dialogs.ExitDialogData
+import com.twoplayerboard.tictactoe.dialogs.MatchEndDialog
+import com.twoplayerboard.tictactoe.models.BoardManager
+import com.twoplayerboard.tictactoe.models.MatchEndDialogData
+import com.twoplayerboard.tictactoe.models.PlaceholderMark
+import com.twoplayerboard.tictactoe.models.Player
 
 /**
  * A [Fragment] subclass for game screen.
